@@ -35,7 +35,7 @@ const Form = ({ currentId, setCurrentId }) => {
     clear();
   };
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({
       creator: "",
       title: "",
@@ -89,7 +89,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase
