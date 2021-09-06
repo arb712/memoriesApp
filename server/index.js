@@ -21,8 +21,6 @@ app.get("/", (req, res) => {
   res.setEncoding("Hello to Memories API.");
 });
 
-// const CONNECTION_URL =
-//   "mongodb+srv://arb712:akuslaluada@cluster0.bgvvz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose
