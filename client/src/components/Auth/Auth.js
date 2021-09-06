@@ -6,7 +6,6 @@ import {
   Container,
   Button,
   Paper,
-  TextField,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
@@ -50,14 +49,14 @@ const Auth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
   const googleSuccess = async (res) => {
     const result = res?.profileObj; // will prevent from error and instead value = undefined
     const token = res?.tokenId;
 
     try {
-      dispatch({ type: "AUTH", data: { res, token } });
+      dispatch({ type: "AUTH", data: { result, token } });
 
       history.push("/");
     } catch (error) {

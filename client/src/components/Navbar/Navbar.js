@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import decode from "jwt-decode";
 import memories from "../../images/memories.png";
 import { AppBar, Avatar, Toolbar, Typography, Button } from "@material-ui/core";
 
@@ -21,6 +22,11 @@ const Navbar = () => {
   };
   useEffect(() => {
     const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
@@ -48,13 +54,13 @@ const Navbar = () => {
               <div className={classes.profile}>
                 <Avatar
                   className={classes.purple}
-                  alt={user.res.profileObj.name}
-                  src={user.res.profileObj.imageUrl}
+                  alt={user.result.name}
+                  src={user.result.imageUrl}
                 >
-                  {user.res.profileObj.name.charAt(0)}
+                  {user.result.name.charAt(0)}
                 </Avatar>
                 <Typography className={classes.userName} variant="h6">
-                  {user.res.profileObj.name}
+                  {user.result.name}
                 </Typography>
                 <Button
                   variant="contained"
