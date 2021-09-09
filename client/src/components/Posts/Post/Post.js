@@ -6,6 +6,7 @@ import {
   CardMedia,
   Button,
   Typography,
+  ButtonBase,
 } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
@@ -13,6 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { deletePost, likePost } from "../../../actions/posts";
 
@@ -21,7 +23,10 @@ import useStyles from "./styles";
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
+
+  const openPost = () => history.push(`/posts/${post._id}`);
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -57,6 +62,7 @@ const Post = ({ post, setCurrentId }) => {
         className={classes.media}
         image={post.selectedFile}
         title={post.title}
+        onClick={openPost}
       />
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
