@@ -65,7 +65,9 @@ const Auth = () => {
   };
   const googleFailure = (error) => {
     console.log(error);
-    console.log("Google sign in was unsuccessful");
+    console.log(
+      "Google sign in was unsuccessful. Try clear your broweser cache and disable your adblock."
+    );
   };
 
   return (
