@@ -1,5 +1,6 @@
 import {
   FETCH_ALL,
+  FETCH_POST,
   CREATE,
   UPDATE,
   DELETE,
@@ -21,6 +22,11 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
         posts: action.payload.data,
         currentPage: action.payload.currentPage,
         numberOfPage: action.payload.numberOfPage,
+      };
+    case FETCH_POST:
+      return {
+        ...state,
+        post: action.payload,
       };
     case FETCH_BY_SEARCH:
       return {
